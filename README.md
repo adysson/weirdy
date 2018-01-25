@@ -45,8 +45,8 @@ If the asset pipeline IS enabled you should have the jquery-rails gem in your Ge
 gem "jquery-rails"
 ```
 
-If the asset pipeline IS NOT enabled in your app, you will have to manually copy the necessary Javascript and stylesheet files.  
-[Javascript] file should go in: "public/javascripts/weirdy/"  
+If the asset pipeline IS NOT enabled in your app, you will have to manually copy the necessary Javascript and stylesheet files.
+[Javascript] file should go in: "public/javascripts/weirdy/"
 [Stylesheet] file should go in: "public/stylesheets/weirdy/"
 
 ### Rails 4
@@ -62,7 +62,7 @@ Now when you go to yourapp.com/weirdy, it should be working!
 
 ## Usage
 
-Weirdy doesn't automatically log exceptions to avoid cluttering your application main code. 
+Weirdy doesn't automatically log exceptions to avoid cluttering your application main code.
 There is a public method to log exceptions:
 
 ``` ruby
@@ -76,7 +76,7 @@ URL, Params, Session, Cookies, Method, User Agent, Referer and IP to the context
 weirdy_log_exception(exception, data = {})
 ```
 
-where data is a hash with extra information you may want to keep to help you debug the error.  
+where data is a hash with extra information you may want to keep to help you debug the error.
 
 In your ApplicationController you can do something like this:
 
@@ -103,7 +103,7 @@ def some_method
   begin
     # code that may raise en exception
   rescue SomeException => e
-    Weirdy.log_exception(e, {:some_variable => some_variable.inspect, 
+    Weirdy.log_exception(e, {:some_variable => some_variable.inspect,
       :some_other_variable => some_other_variable.inspect})
   end
 end
@@ -135,62 +135,62 @@ Weirdy::Config.exception_message_max_chars = 125
 ### Options
 
 #### mail_recipients
-*String or Array*  
+*String or Array*
 The recipients of the email, this field could be a single email or an array of emails.
 If this field is empty, weirdy won't send any emails.
 
 #### auth
-*String or Proc*  
-Without an assigned value, it will allow to check weirdy without any auth. Be aware of this before deploying!  
-If it is a string in the form of "user/password" it will use http basic auth with the given user/password  
-If it is a proc, then if the proc returns true it allows access, if it return false it doesn't.  
+*String or Proc*
+Without an assigned value, it will allow to check weirdy without any auth. Be aware of this before deploying!
+If it is a string in the form of "user/password" it will use http basic auth with the given user/password
+If it is a proc, then if the proc returns true it allows access, if it return false it doesn't.
 The proc receives the active controller as a parameter, this way you can access session and cookies with
-controller.session and controller.send(:cookies) (cookies is a private method)  
-eg: `Weirdy::Config.auth = lambda { |controller| User.find(controller.session[:user_id]).admin? }`  
+controller.session and controller.send(:cookies) (cookies is a private method)
+eg: `Weirdy::Config.auth = lambda { |controller| User.find(controller.session[:user_id]).admin? }`
 Checkout `use_main_app_controller` property to be able to use the main application controller as the base
-controller for the engine, so you can use your own application authentication methods.  
+controller for the engine, so you can use your own application authentication methods.
 eg: `Weirdy::Config.auth = lambda { |controller| controller.current_user.admin? }`
 
 #### use_main_app_controller
-*Boolean*  
+*Boolean*
 It uses the main app controller as base for the engine, so you are able to access your application authentication methods
-on the `auth` proc. Check out `auth` for an explanation.  
+on the `auth` proc. Check out `auth` for an explanation.
 
 #### mail_sender
-*String*  
+*String*
 The sender of the email.
 
 #### app_name
-*String*  
+*String*
 Your application name.
 
 #### exceptions_per_page
-*Number*  
+*Number*
 Number of exceptions shown before paging.
 
 #### shown_stack
-*Number*  
+*Number*
 Number of lines visible (when collapsed) on the stack.
 
 #### notifier_proc
-*Proc*  
-The proc receives a mailer object and the wexception object(logged weirdy exception). By default it sends an email 
+*Proc*
+The proc receives a mailer object and the wexception object(logged weirdy exception). By default it sends an email
 on the request by just calling deliver on the email. But you could use this proc to run any code(notify to basecamp, etc).
 The wexception is also passed, so if you are having trouble with serializing mailer objects when using a queing library,
-you can call: `Weirdy.notify_exception(wexception)` to send the email.  
+you can call: `Weirdy.notify_exception(wexception)` to send the email.
 Check the delayed job example below.
 
 #### shown_occurrences
-*Number*  
-Number of exception occurrences to show.  
+*Number*
+Number of exception occurrences to show.
 
 #### exception_message_max_chars
-*Number*  
-Max chars on the exception's message to show on not specific message places, 
-like mail subject or exceptions list.  
+*Number*
+Max chars on the exception's message to show on not specific message places,
+like mail subject or exceptions list.
 
 #### application_path_key
-*String*  
+*String*
 String with a keyword identifying some part or the whole application path. Used to
 identify and put exception application lines in bold when showing the backtrace.
 Otherwise it will only use Rails.root, which might change between releases if you are using
@@ -198,7 +198,7 @@ for example capistrano to make your deployments.
 Suppose you are using Capistrano, then "/path/to/your/app/releases" is a good value for this string,
 or just "releases", but there might be some other line in your backtrace that has that string,
 so try to be the more specific that is possible.
-Weirdy will just ask for string#include for each line in the backtrace.  
+Weirdy will just ask for string#include for each line in the backtrace.
 
 To avoid repeating Weirdy::Config, you can use this block as it was shown above:
 
@@ -231,7 +231,7 @@ end
 
 ## Kaminari users
 
-Weirdy uses will_paginate, which has problems when kaminari is also included in your project.  
+Weirdy uses will_paginate, which has problems when kaminari is also included in your project.
 If you use kaminari or have it in your Gemfile/Gemfile.lock, there is this configuration you can use to change
 kaminari's pagination method:
 
@@ -243,8 +243,9 @@ end
 
 ## Compatibility
 
-Rails: It was tested with Rails 3.2 and 4.0. It should work with >= 3.1. Let me know of any issues.  
-DB's: It was tested with: MySql, Postgres, and SQLite  
+Rails: v0.3.3 was tested with Rails 3.2 and 4.0. It should work with >= 3.1.
+Rails: v0.3.4 was tested with Rails 5.1 only. It should work with >= 4.0.
+Let me know of any issues.
 
 
 
