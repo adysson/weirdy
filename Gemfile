@@ -17,7 +17,7 @@ gem "jquery-rails"
 gem 'pg'
 gem 'thin'
 gem 'debugger'
-gem 'will_paginate'
+gem 'kaminari'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 

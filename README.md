@@ -229,17 +229,9 @@ end
 # Weirdy.notify_exception(wexception) is the public method to send emails based on a weirdy exception (wexception)
 ```
 
-## Kaminari users
+## will_paginate users
 
-Weirdy uses will_paginate, which has problems when kaminari is also included in your project.
-If you use kaminari or have it in your Gemfile/Gemfile.lock, there is this configuration you can use to change
-kaminari's pagination method:
-
-``` ruby
-Kaminari.configure do |config|
-  config.page_method_name = :per_page_kaminari
-end
-```
+Weirdy uses kaminari, which has problems when will_paginate is also included in your project.
 
 ## Compatibility
 

@@ -1,5 +1,3 @@
-require "will_paginate"
-
 require "weirdy/engine"
 require "weirdy/config"
 require "weirdy/controller_methods"
@@ -14,7 +12,7 @@ module Weirdy
       return nil
     end
   end
-  
+
   # Public method to send notification email.
   def self.notify_exception(wexception)
     begin
@@ -24,7 +22,7 @@ module Weirdy
       return nil
     end
   end
-  
+
   def self.log_weirdy_error(exception)
     Rails.logger.error %Q{Weirdy Gem error: #{exception.class.name} - "#{exception.message}"\n#{exception.backtrace.to_a[0..10].map {|line| "  " + line}.join("\n")}\n\n}
   end
