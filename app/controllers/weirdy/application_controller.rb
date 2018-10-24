@@ -1,9 +1,9 @@
 module Weirdy
   class ApplicationController < Weirdy::Config.use_main_app_controller ? ::ApplicationController : ActionController::Base
-    before_action :auth
-
+    before_filter :auth
+    
     private
-
+    
     def auth
       if Weirdy::Config.auth.is_a? Proc
         if !Weirdy::Config.auth.call(self)

@@ -232,12 +232,19 @@ end
 ## will_paginate users
 
 Weirdy uses kaminari, which has problems when will_paginate is also included in your project.
+If you use kaminari or have it in your Gemfile/Gemfile.lock, there is this configuration you can use to change
+kaminari's pagination method:
+
+``` ruby
+Kaminari.configure do |config|
+  config.page_method_name = :per_page_kaminari
+end
+```
 
 ## Compatibility
 
-Rails: v0.3.3 was tested with Rails 3.2 and 4.0. It should work with >= 3.1.
-Rails: v0.3.4 was tested with Rails 5.1 only. It should work with >= 4.0.
-Let me know of any issues.
+Rails: It was tested with Rails 3.2 and 4.0. It should work with >= 3.1. Let me know of any issues.
+DB's: It was tested with: MySql, Postgres, and SQLite
 
 
 

@@ -7,10 +7,10 @@
   </div>
   <div class="order">
     <span class="label">Order by</span>:
-    <%= link_to_if params[:order] != "last_happened_at" && params[:order].present?,
-      "Last Happened At", root_url('order' => 'last_happened_at', state: params[:state]) %>
-    <%= link_to_if params[:order] != "occurrences",
-      "Occurrences", root_url('order' => 'occurrences', state: params[:state]) %>
+    <%= link_to_if params[:order] != "last_happened_at" && params[:order].present?, 
+      "Last Happened At", append_query_params('order' => 'last_happened_at') %>
+    <%= link_to_if params[:order] != "occurrences", 
+      "Occurrences", append_query_params('order' => 'occurrences') %>
   </div>
 </div>
 <table>
@@ -41,7 +41,7 @@
           <div class="first_happened_at" title="First Happened At">
             First: <%= time_ago_in_words wexception.first_happened_at %> ago
           </div>
-
+          
           <div class="actions">
             <%= state_change_links(wexception) %>
           </div>

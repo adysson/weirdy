@@ -1,4 +1,4 @@
-class CreateWeirdyWexceptionOccurrences < ActiveRecord::Migration[5.1]
+class CreateWeirdyWexceptionOccurrences < ActiveRecord::Migration
   def change
     create_table :weirdy_wexception_occurrences do |t|
       t.references :wexception
@@ -7,5 +7,7 @@ class CreateWeirdyWexceptionOccurrences < ActiveRecord::Migration[5.1]
       t.timestamp :happened_at
       t.text :data
     end
+    
+    add_index :weirdy_wexception_occurrences, :wexception_id
   end
 end
