@@ -16,7 +16,7 @@ module Weirdy
   # Public method to send notification email.
   def self.notify_exception(wexception)
     begin
-      Notifier.exception(wexception).deliver
+      Notifier.exception(wexception).deliver_now
     rescue Exception => e
       log_weirdy_error(e)
       return nil

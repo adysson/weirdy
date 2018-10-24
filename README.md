@@ -127,7 +127,7 @@ Weirdy::Config.mail_sender = "Weirdy <bugs@weirdyapp.com>"
 Weirdy::Config.app_name = "My application"
 Weirdy::Config.exceptions_per_page = 20
 Weirdy::Config.shown_stack = 10
-Weirdy::Config.notifier_proc = lambda { |email, wexception| email.deliver }
+Weirdy::Config.notifier_proc = lambda { |email, wexception| email.deliver_now }
 Weirdy::Config.shown_occurrences = 15
 Weirdy::Config.exception_message_max_chars = 125
 ```

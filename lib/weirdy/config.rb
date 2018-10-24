@@ -1,18 +1,18 @@
 module Weirdy
   class Config
     class << self
-      attr_accessor :mail_recipients, 
+      attr_accessor :mail_recipients,
                     :auth,
                     :mail_sender,
-                    :app_name, 
+                    :app_name,
                     :exceptions_per_page,
                     :shown_stack,
-                    :notifier_proc, 
+                    :notifier_proc,
                     :use_main_app_controller,
                     :shown_occurrences,
                     :exception_message_max_chars,
                     :application_path_key
-                    
+
       def configure(&blk)
         yield self
       end
@@ -21,7 +21,7 @@ module Weirdy
     self.app_name = "My application"
     self.exceptions_per_page = 20
     self.shown_stack = 10
-    self.notifier_proc = lambda { |email, wexception| email.deliver }
+    self.notifier_proc = lambda { |email, wexception| email.deliver_now }
     self.use_main_app_controller = false
     self.shown_occurrences = 15
     self.exception_message_max_chars = 125
