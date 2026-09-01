@@ -239,7 +239,24 @@ Rails: v0.3.3 was tested with Rails 3.2 and 4.0. It should work with >= 3.1.
 Rails: v0.3.4 was tested with Rails 5.1 only. It should work with >= 4.0.
 Let me know of any issues.
 
+## Rails 7.1+ hosts
 
+This release serializes `backtrace`/`data` with an explicit YAML coder, so host apps
+running `config.load_defaults 7.0+` (nil `default_column_serializer`) no longer need
+either of these workarounds:
+
+- remove any app-level override of `Weirdy::WexceptionOccurrence`;
+- remove `config.active_record.default_column_serializer = YAML` pins added for weirdy.
+
+Stored data is unchanged (YAML, byte-compatible with Rails ≤ 7.0), so no migration
+is required and rolling back to an older weirdy remains safe.
+
+If your app logs request params through `weirdy_log_exception`, keep
+`ActionController::Parameters` in `config.active_record.yaml_column_permitted_classes`
+so captured rows can be loaded back. On Ruby 3.x (Psych >= 5.1) Rails 7.1 also
+safe-dumps with that list, so permit the transitive closure as well — at minimum
+`ActiveSupport::HashWithIndifferentAccess`, plus any other classes your context data
+may contain (e.g. `Symbol` for symbol keys).
 
 And that is it! Please report [issues] on GitHub.
 
