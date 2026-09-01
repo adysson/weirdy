@@ -13,6 +13,8 @@ module Dummy
 
     # Weirdy serializes captured request params (ActionController::Parameters)
     # into a YAML column; hosts need this same setting to read those rows back.
-    config.active_record.yaml_column_permitted_classes = [ActionController::Parameters]
+    # Under Psych >= 5.1 Rails 7.1 safe-dumps with these classes too, so the
+    # transitive closure must be permitted: Parameters wraps an HWIA internally.
+    config.active_record.yaml_column_permitted_classes = [ActionController::Parameters, ActiveSupport::HashWithIndifferentAccess]
   end
 end
