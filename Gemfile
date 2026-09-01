@@ -14,5 +14,6 @@ gem "delayed_job"           # used by test/dummy/app/jobs/notifier_job.rb
 gem "delayed_job_active_record"
 
 group :test do
+  gem "minitest", "~> 5.0"         # Rails 7.1 test integration is incompatible with minitest 6
   gem "rails-controller-testing"   # restores assigns() used by controller tests (dev/test only)
 end
