@@ -7,7 +7,7 @@ module Weirdy
     def auth
       if Weirdy::Config.auth.is_a? Proc
         if !Weirdy::Config.auth.call(self)
-          render :nothing => true
+          render plain: ""
         end
       elsif Weirdy::Config.auth.is_a? String
         username, password = Weirdy::Config.auth.split('/')
