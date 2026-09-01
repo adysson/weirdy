@@ -1,36 +1,18 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 # Declare your gem's dependencies in weirdy.gemspec.
-# Bundler will treat runtime dependencies like base dependencies, and
-# development dependencies will be added by default to the :development group.
 gemspec
 
-# jquery-rails is used by the dummy application
-gem "jquery-rails"
+# Development/test stack for the engine dummy app.
+gem "rails", "~> 7.1.6"
 
-# Declare any dependencies that are still in development here instead of in
-# your gemspec. These might include edge Rails or gems from your path or
-# Git. Remember to move these dependencies to your gemspec before releasing
-# your gem to rubygems.org.
+gem "pg"
+gem "kaminari"
+gem "jquery-rails"          # app/assets/javascripts/weirdy/application.js requires jquery + jquery_ujs
+gem "sprockets-rails"       # rails/all no longer implies an asset pipeline
+gem "delayed_job"           # used by test/dummy/app/jobs/notifier_job.rb
+gem "delayed_job_active_record"
 
-#gem 'mysql2'
-gem 'pg'
-gem 'thin'
-gem 'debugger'
-gem 'kaminari'
-gem 'delayed_job'
-gem 'delayed_job_active_record'
-
-
-# Included to be able to compile assets
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
+group :test do
+  gem "rails-controller-testing"   # restores assigns() used by controller tests (dev/test only)
 end
