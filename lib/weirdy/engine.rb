@@ -3,7 +3,9 @@ module Weirdy
     isolate_namespace Weirdy
 
     initializer "weirdy.assets.precompile" do |app|
-      app.config.assets.precompile += %w( application.js application.css )
+      if app.config.respond_to?(:assets)
+        app.config.assets.precompile += %w( weirdy/application.js weirdy/application.css )
+      end
     end
   end
 end
